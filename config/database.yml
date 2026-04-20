@@ -16,10 +16,11 @@ production:
     <<: *default
     url: <%= ENV["DATABASE_URL"] %>
 
-  cable:
-    <<: *default
+  cache:
     url: <%= ENV["DATABASE_URL"] %>
 
   queue:
-    <<: *default
+    url: <%= ENV["DATABASE_URL"] %>
+
+  cable:
     url: <%= ENV["DATABASE_URL"] %>

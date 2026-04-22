@@ -3,7 +3,8 @@ class MemosController < ApplicationController
 
   # GET /memos or /memos.json
   def index
-    @memos = Memo.all
+    # @memos = Memo.all
+    @memos = current_user.memos
   end
 
   # GET /memos/1 or /memos/1.json
@@ -21,7 +22,7 @@ class MemosController < ApplicationController
 
   # POST /memos or /memos.json
   def create
-    @memo = Memo.new(memo_params)
+    @memo = current_user.memos.build(memo_params)
 
     respond_to do |format|
       if @memo.save
@@ -65,6 +66,7 @@ class MemosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def memo_params
-      params.expect(memo: [ :title, :content ])
+      # params.expect(memo: [ :title, :content ])
+      params.require(:memo).permit(:title, :content)
     end
 end
